@@ -1,5 +1,5 @@
 FROM scratch
 ENV PORT=2000
-COPY p-vip-gateway /
-COPY entrypoint.sh /
+COPY docker/p-vip-gateway /
+COPY docker/entrypoint.sh /
 ENTRYPOINT ["./entrypoint.sh"]
