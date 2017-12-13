@@ -1,10 +1,9 @@
 package main
 
 import (
-	"flag"
 	"./api"
 	"./server"
-	"fmt"
+	"os"
 )
 
 //type Gateway struct{}
@@ -15,15 +14,15 @@ import (
 //}
 
 func main() {
-	var port = flag.Int("port", 2000, "监听端口")
-	flag.Parse()
-
-	fmt.Printf("flag: %d\n", *port)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "2000"
+	}
 
 	handler := &server.GatewayHandler{}
 	processor := api.NewGatewayProcessor(handler)
 
-	server.Serve(processor, int32(*port))
+	server.Serve(processor, port)
 
 	//r := registry.NewRegistry(registry.Addrs("10.0.1.200"))
 
