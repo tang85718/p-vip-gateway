@@ -3,11 +3,10 @@ package server
 import (
 	"git.apache.org/thrift.git/lib/go/thrift"
 	"fmt"
+	"log"
 )
 
 func Serve(processor thrift.TProcessor, port string) error {
-
-
 	protocolFactory := thrift.NewTBinaryProtocolFactoryDefault()
 	transportFactory := thrift.NewTBufferedTransportFactory(8192)
 
@@ -18,7 +17,7 @@ func Serve(processor thrift.TProcessor, port string) error {
 		return err
 	}
 
-	fmt.Printf("Listening at %s", host)
+	log.Printf("Listening at %s", host)
 
 	server := thrift.NewTSimpleServer4(processor, socket, transportFactory, protocolFactory)
 	server.Serve()
